@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'botup'
+
+Botup::Generator.generate(ARGV.first)

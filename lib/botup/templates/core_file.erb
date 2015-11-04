@@ -1,0 +1,18 @@
+require 'telegram/bot'
+require 'yaml'
+
+$:.unshift("#{Dir.pwd}/lib")
+
+require '<%= snake_case_name %>/client'
+require '<%= snake_case_name %>/messenger'
+require '<%= snake_case_name %>/message_parser'
+require '<%= snake_case_name %>/commands_keeper'
+require '<%= snake_case_name %>/commands_manager'
+
+module <%= class_name %>
+  CONFIGURATION = YAML.load_file("#{Dir.pwd}/config/config.yml")
+
+  def self.start_client
+    Client.new(CONFIGURATION['bot_token']).start
+  end
+end

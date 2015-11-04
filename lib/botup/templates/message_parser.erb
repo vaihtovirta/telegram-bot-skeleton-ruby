@@ -1,0 +1,25 @@
+module <%= class_name %>
+  class MessageParser
+    attr_reader :message
+
+    def initialize(message)
+      @message = message
+    end
+
+    def command
+      parse_message.first.to_sym
+    end
+
+    def params
+      parse_message { |words| words.drop(1) } || []
+    end
+
+    private
+
+    def parse_message
+      if message.text && message.text[0] == '/' && message.text.length > 1
+        message.text[1..-1].split(' ')
+      end
+    end
+  end
+end
