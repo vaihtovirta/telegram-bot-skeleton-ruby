@@ -13,6 +13,7 @@ Just run this in your terminal:
 Bootstrap new telegram bot was never so simple!
 
     $ botup my_super_bot # Provide bot name in snake_case
+    $ cd my_super_bot && bundle install # Install dependencies
     
 ## What's in the bot?
 
