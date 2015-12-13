@@ -44,7 +44,7 @@ Bootstrap new telegram bot was never so simple!
     ```
 - Start bot:
     
-    ```$ bundle exec my_super_bot/bin/my_super_bot```
+    ```$ my_super_bot/bin/my_super_bot```
 - Try it out by sending /test command(or some other command that you have already implemented)
 
     ![](https://monosnap.com/file/c2WA7eWNmsex9ccf9E50C36Vro17kr.png)
