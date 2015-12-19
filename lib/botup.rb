@@ -1,13 +1,10 @@
-require 'thor'
-
 require 'botup/version'
-require 'botup/processor'
+require 'botup/file_processor'
 
 module Botup
-  class Generator < Thor
-    desc 'generates bot_name_in_snake_case', 'generate bot by name'
+  class Generator
     def self.generate(name)
-      Processor.new(name).call
+      FileProcessor.new(name).call
     end
   end
 end

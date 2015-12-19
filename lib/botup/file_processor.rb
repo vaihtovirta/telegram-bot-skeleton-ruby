@@ -3,7 +3,7 @@ require 'erb'
 require 'ostruct'
 
 module Botup
-  class Processor
+  class FileProcessor
     attr_reader :base_name
 
     def initialize(base_name)
