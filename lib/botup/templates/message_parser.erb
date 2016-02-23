@@ -17,9 +17,17 @@ module <%= class_name %>
     private
 
     def parse_message
-      if message.text && message.text[0] == '/' && message.text.length > 1
+      if  message_present? && message_starts_with_slash?
         message.text[1..-1].split(' ')
       end
+    end
+
+    def message_present?
+      message.text && message.text.length > 1
+    end
+
+    def message_starts_with_slash?
+      message.text[0] == '/'
     end
   end
 end
