@@ -8,20 +8,32 @@ module <%= class_name %>
 
     def start
       begin
-        Telegram::Bot::Client.run(token) do |bot|
-          bot.listen do |message|
-            if message.text
-              messenger = Messenger.new(api: bot.api, chat_id: message.chat.id)
-              response = CommandsManager.new(message: message, messenger: messenger).call
-              messenger.send_text(response)
-            end
-          end
-        end
-      rescue Telegram::Bot::Exceptions::ResponseError => e
-        puts e
+        respond
+      rescue Telegram::Bot::Exceptions::ResponseError => exception
+        puts exception
         sleep 1
         retry # run again on telegram server error
       end
+    end
+
+    private
+
+    def run_client(&block)
+      Telegram::Bot::Client.run(token) do |bot|
+        yield bot if block_given?
+      end
+    end
+
+    def respond
+      run_client do |bot|
+        bot.listen do |message|
+          Responder.new(bot.api, message).call if message.text
+        end
+      end
+    end
+
+    def get_updates(bot, next_offset)
+      bot.api.getUpdates(offset: next_offset, timeout: 20)
     end
   end
 end
