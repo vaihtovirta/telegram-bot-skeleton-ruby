@@ -31,9 +31,5 @@ module <%= class_name %>
         end
       end
     end
-
-    def get_updates(bot, next_offset)
-      bot.api.getUpdates(offset: next_offset, timeout: 20)
-    end
   end
 end
