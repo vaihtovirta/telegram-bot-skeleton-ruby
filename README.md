@@ -42,7 +42,7 @@ Bootstrap new telegram bot was never so simple!
         Schedule.new(Time.now).call 
     end
     ```
-- Start bot:
+- Start bot by running executable:
     
     ```$ my_super_bot/bin/my_super_bot```
 - Try it out by sending /test command(or some other command that you have already implemented)
