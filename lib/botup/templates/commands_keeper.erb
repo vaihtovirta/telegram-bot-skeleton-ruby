@@ -1,6 +1,6 @@
 module <%= class_name %>
   module CommandsKeeper
-    COMMANDS = %i(test)
+    COMMANDS = %i(test).freeze
 
     def test
       'Wow, I\'m using telegram bot!'
