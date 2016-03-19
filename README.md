@@ -28,6 +28,7 @@ Bootstrap new telegram bot was never so simple!
     | | |____client.rb              # Core telegram bot class; takes token and answer to any command sent
     | | |____commands_keeper.rb     # Stores all available commands (includes test command by deault); 
     | | |____commands_manager.rb    # Takes command and handles next step
+    | | |____configurator.rb        # Parses and fetches config from config.yml
     | | |____message_parser.rb      # Parses sent message to command and params
     | | |____messenger.rb           # Handles current chat item and sends output to user
     | |____my_super_bot.rb
