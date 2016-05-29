@@ -40,7 +40,7 @@ Bootstrap new telegram bot was never so simple!
 
     ```
     def today_schedule
-        Schedule.new(Time.now).call 
+      Schedule.new(Time.now).call 
     end
     ```
 - Start bot by running executable:
