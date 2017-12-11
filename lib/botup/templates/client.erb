@@ -1,7 +1,5 @@
 module <%= class_name %>
   class Client
-    attr_reader :token
-
     def initialize(token)
       @token = token
     end
@@ -18,16 +16,14 @@ module <%= class_name %>
 
     private
 
-    def run_client(&block)
-      Telegram::Bot::Client.run(token) do |bot|
-        yield bot if block_given?
-      end
-    end
+    attr_reader :token
 
     def respond
-      run_client do |bot|
+      Telegram::Bot::Client.run(token) do |bot|
         bot.listen do |message|
-          Responder.new(bot.api, message).call if message.text
+          next unless message.text
+
+          Responder.new(api: bot.api, message: message).call
         end
       end
     end

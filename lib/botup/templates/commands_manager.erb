@@ -1,31 +1,18 @@
 module <%= class_name %>
   class CommandsManager
     include CommandsKeeper
+    extend Forwardable
 
-    attr_reader :command, :params, :message
+    def_delegators :@parser, :message, :command, :params
+    attr_reader :parser
 
-    def initialize(args)
-      @message = args.fetch(:message)
-      @command = detect_command
-      @params = parser.params
+
+    def initialize(parser:)
+      @parser = parser
     end
 
     def call
-      if self.class.instance_method(command).arity == 0
-        send command
-      else
-        send command, params
-      end
-    end
-
-    private
-
-    def detect_command
-      has_command?(parser.command) ? parser.command : :help
-    end
-
-    def parser
-      MessageParser.new(message)
+      send(command, params: params, message: message)
     end
   end
 end

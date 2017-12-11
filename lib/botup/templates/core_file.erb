@@ -1,18 +1,16 @@
+require 'dotenv/load'
 require 'telegram/bot'
-require 'yaml'
 
-$:.unshift("#{Dir.pwd}/lib")
+$LOAD_PATH.unshift("#{Dir.pwd}/lib")
 
-require '<%= snake_case_name %>/configurator'
 require '<%= snake_case_name %>/client'
-require '<%= snake_case_name %>/messenger'
 require '<%= snake_case_name %>/message_parser'
 require '<%= snake_case_name %>/commands_keeper'
 require '<%= snake_case_name %>/commands_manager'
 require '<%= snake_case_name %>/responder'
 
 module <%= class_name %>
-  def self.start_client
-    Client.new(Configurator.bot_token).start
+  def self.start
+    Client.new(ENV['TELEGRAM_BOT_TOKEN']).start
   end
 end

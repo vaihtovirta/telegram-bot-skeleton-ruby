@@ -2,13 +2,6 @@ AllCops:
   Exclude:
     - '.bundle/**/*'
     - 'bin/**/*'
-    - 'config/**/*'
-    - 'db/**/*'
-    - 'lib/tasks/**/*'
-    - 'app/controllers/users/confirmations_controller.rb'
-    - 'app/controllers/users/registrations_controller.rb'
-    - 'lib/extensions/simple_form/inputs/array_input.rb'
-    - 'vendor/assets/**/**/*'
 
 Documentation:
   Enabled: false

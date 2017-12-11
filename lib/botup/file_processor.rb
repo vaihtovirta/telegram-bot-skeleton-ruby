@@ -4,6 +4,8 @@ require 'ostruct'
 
 module Botup
   class FileProcessor
+    FILE_NAMES_TO_SKIP = ['.', '..', 'core_file.erb'].freeze
+
     attr_reader :base_name
 
     def initialize(base_name)
@@ -23,16 +25,15 @@ module Botup
     def prepare_files
       FileUtils.mkdir_p(output_main_folder)
       FileUtils.mkdir_p("#{output_folder}/bin/")
-      FileUtils.mkdir_p("#{output_folder}/config/")
-      FileUtils.cp("#{config_folder}/config.yml", "#{output_folder}/config")
       FileUtils.cp("#{config_folder}/Gemfile", output_folder)
+      FileUtils.cp("#{config_folder}/.env", output_folder)
     end
 
     def populate_basic_templates(from, to)
       Dir.foreach(from) do |file_name|
         current_path =  "#{from}/#{file_name}"
 
-        next if file_name == '.' || file_name == '..' || file_name == 'core_file.erb'
+        next if FILE_NAMES_TO_SKIP.include?(file_name)
 
         erb = ERB.new(File.read(current_path))
         result = erb.result(namespace.instance_eval { binding })
@@ -43,10 +44,10 @@ module Botup
       end
     end
 
-    def populate_bot_named_files(source, out)
+    def populate_bot_named_files(source, output)
       erb = ERB.new(File.read(source))
       result = erb.result(namespace.instance_eval { binding })
-      File.open("#{out}", 'w') << result
+      File.open(output.to_s, 'w') << result
     end
 
     def bin_folder
