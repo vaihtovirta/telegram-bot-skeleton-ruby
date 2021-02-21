@@ -1,4 +1,9 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-# Specify your gem's dependencies in botup.gemspec
-gemspec
+gem "telegram-bot-ruby"
+
+group :development do
+  gem "pry"
+  gem "rerun"
+  gem "rubocop"
+end
